@@ -1,1 +1,0 @@
-[{"southAmerica":["Argentina","Uruguaysdds","Brasil","Peru"],"area":"17.84 millones km2","population":"422.5 millones (2016)","id":0},{"southAmerica":["Paraguay","Brasil","Brasil","Peru"],"area":"17.84 millones km2","population":"422.5 millones (2016)","id":1}]
