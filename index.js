@@ -1,14 +1,14 @@
-class Contenedor {
+class Container {
     constructor(name) {
         this.name = name;
-        this.fileSystem = require("fs");
+        this.fileSystem = require('fs');
     }
 
     async saveFile(object) {
         try {
             const filePrev = await this.fileSystem.promises.readFile(
                 `./${this.name}.txt`,
-                "utf-8"
+                'utf-8'
             );
             const objParseado = JSON.parse(filePrev);
             object.id = objParseado.length + 1;
@@ -32,7 +32,7 @@ class Contenedor {
         try {
             const file = await this.fileSystem.promises.readFile(
                 `./${this.name}.txt`,
-                "utf-8"
+                'utf-8'
             );
             const arrayObjFiles = JSON.parse(file);
             const objSelected = arrayObjFiles.find((item) => item.id === id);
@@ -47,7 +47,7 @@ class Contenedor {
         try {
             const allFiles = await this.fileSystem.promises.readFile(
                 `./${this.name}.txt`,
-                "utf-8"
+                'utf-8'
             );
             const files = JSON.parse(allFiles);
             return files;
@@ -79,26 +79,26 @@ class Contenedor {
     }
 }
 
-const products = new Contenedor("item");
+const products = new Container('item');
 
 const items = [
     {
-        name: "Manzana",
+        name: 'Manzana',
         price: 100,
         thumbnail:
-            "https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/09/manzana.jpg?ssl=1",
+            'https://i0.wp.com/historiasdelahistoria.com/wordpress-2.3.1-ES-0.1-FULL/wp-content/uploads/2015/09/manzana.jpg?ssl=1',
     },
     {
-        name: "Banana",
+        name: 'Banana',
         price: 100,
         thumbnail:
-            "https://resizer.glanacion.com/resizer/MS-9klbANu7SZPCNW4FwAh_FTt8=/768x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/BJB5RPAYRNEOTK6D7JAHQ6ZCCA.jpg",
+            'https://resizer.glanacion.com/resizer/MS-9klbANu7SZPCNW4FwAh_FTt8=/768x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/BJB5RPAYRNEOTK6D7JAHQ6ZCCA.jpg',
     },
     {
-        name: "Naranja",
+        name: 'Naranja',
         price: 100,
         thumbnail:
-            "https://www.hogarmania.com/archivos/201211/438-nutricion-naranja-propiedades-xl-1280x720x80xX.jpg",
+            'https://www.hogarmania.com/archivos/201211/438-nutricion-naranja-propiedades-xl-1280x720x80xX.jpg',
     },
 ];
 
