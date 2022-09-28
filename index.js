@@ -1,34 +1,27 @@
-// const http = require('http');
+const express = require('express');
+const app = express();
+const PORT = process.env.port || 8080;
+const fs = require('fs');
 
-// const server = http.createServer((peticion, respuesta) =>
-//     respuesta.end('hola mundo')
-// );
+const getProductsFromFile = (fs) => {
+    const files = fs.readFileSync('products.txt', 'utf-8');
+    const arrayFile = JSON.parse(files);
+    return arrayFile;
+};
 
-// const conectedServer = server.listen(8000, () =>
-//     console.log(`servidor http escuchando en el puerto`)
-// );
+const getRandomProduct = (callback) => {
+    const randomNumber = Math.ceil(Math.random() * callback.length);
+    return callback[randomNumber];
+};
 
-// Ejercicio practico
-// const http = require('http');
+const random = Math.ceil(Math.random() * getProductsFromFile(fs).length);
 
-// const getTime = () => {
-//     const time = new Date().getHours();
+app.get('/productos', (request, response) =>
+    response.send(getProductsFromFile(fs))
+);
+app.get('/productoRandom', (request, response) =>
+    response.send(getRandomProduct(getProductsFromFile(fs)))
+);
 
-//     if (time >= 6 && time <= 12) return '<h1>Buenos dias</h1>';
-//     if (time >= 13 && time <= 19) return '<h1>Buenos tardes</h1>';
-//     return '<h1>Buenos noches</h1>';
-// };
-
-// const server = http.createServer((req, res) => res.end(getTime()));
-
-// const connectedServer = server.listen(8080, () => console.log('hola'));
-
-// const express = require('express');
-// const app = express();
-// const port = process.env.port || 8080;
-
-// app.get('/', (req, res) => res.send('Hola home'));
-// app.get('/visita', (req, res) => res.send('Hola visita'));
-// app.get('*', (req, res) => res.send('Hola no encontrado'));
-
-// const connectedServer = app.listen(port, () => console.log('enviado'));
+const server = app.listen(PORT, () => console.log('El servidor fue deplegado'));
+server.on(PORT, () => console.error('Hay error'));
