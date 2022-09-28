@@ -1,81 +1,34 @@
-// let randomNumber = [];
+// const http = require('http');
 
-// const saveRandomNumber = {};
+// const server = http.createServer((peticion, respuesta) =>
+//     respuesta.end('hola mundo')
+// );
 
-// for (let i = 0; i < 10000; i++) {
-//     randomNumber.push(Math.ceil(Math.random() * 20));
-// }
+// const conectedServer = server.listen(8000, () =>
+//     console.log(`servidor http escuchando en el puerto`)
+// );
 
-// const same = (arr, number) => {
-//     let count = 0;
-//     arr.forEach((item) => {
-//         if (item == number) count++;
-//     });
-//     return count;
+// Ejercicio practico
+// const http = require('http');
+
+// const getTime = () => {
+//     const time = new Date().getHours();
+
+//     if (time >= 6 && time <= 12) return '<h1>Buenos dias</h1>';
+//     if (time >= 13 && time <= 19) return '<h1>Buenos tardes</h1>';
+//     return '<h1>Buenos noches</h1>';
 // };
 
-// const randomNumberKeys = randomNumber.reduce((acc, item) => {
-//     acc[item] = same(randomNumber, item);
+// const server = http.createServer((req, res) => res.end(getTime()));
 
-//     return acc;
-// }, {});
+// const connectedServer = server.listen(8080, () => console.log('hola'));
 
-// console.log(randomNumberKeys);
+// const express = require('express');
+// const app = express();
+// const port = process.env.port || 8080;
 
-// ESTE EJERCICIO LO HIZO EL PROFE
+// app.get('/', (req, res) => res.send('Hola home'));
+// app.get('/visita', (req, res) => res.send('Hola visita'));
+// app.get('*', (req, res) => res.send('Hola no encontrado'));
 
-// const getRandom = () => Math.ceil(Math.random() * 20);
-// const numbers = {};
-
-// for (let i = 0; i < 10; i++) {
-//     const number = getRandom();
-//     if (!numbers[number]) numbers[number] = 0;
-//     numbers[number]++;
-// }
-
-// console.log(numbers);
-
-const products = [
-    { id: 1, nombre: "Escuadra", precio: 323 },
-    { id: 2, nombre: "Calculadora", precio: 234 },
-    { id: 3, nombre: "Globo tarraqueo", precio: 45 },
-    { id: 4, nombre: "Paleta pintura", precio: 456 },
-    { id: 5, nombre: "Reloj", precio: 67 },
-    { id: 6, nombre: "Agenda", precio: 78 },
-];
-
-const getProductsNames = products.map((item) => item.nombre).join(", ");
-
-const totalPrice = products.reduce((acc, item) => {
-    return acc + item.precio;
-}, 0);
-
-const mediaPrice = totalPrice / products.length;
-
-const getAllPrices = (products) => products.map((price) => price.precio);
-
-const getMinPrice = (products) => {
-    const minor = Math.min(...getAllPrices(products));
-    return minor;
-};
-
-const getMaxPrice = (products) => {
-    const max = Math.max(...getAllPrices(products));
-    return max;
-};
-
-const getProductByPrice = (products, price) => {
-    const objectProduct = products.find((product) => product.precio == price);
-
-    return objectProduct.nombre;
-};
-
-const info = {
-    namesProducts: getProductsNames,
-    total: totalPrice,
-    mediaPrice: mediaPrice,
-    ProductMinPrice: getProductByPrice(products, getMinPrice(products)),
-    ProductMaxPrice: getProductByPrice(products, getMaxPrice(products)),
-};
-
-console.log(info);
+// const connectedServer = app.listen(port, () => console.log('enviado'));
