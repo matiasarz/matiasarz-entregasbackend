@@ -17,12 +17,12 @@ class Container {
                 JSON.stringify([...objParseado, object])
             );
         } catch (e) {
-            console.error(e);
             object.id = 1;
             await this.fileSystem.promises.writeFile(
                 `./${this.name}.txt`,
                 JSON.stringify([object])
             );
+            console.error('Primer archivo generado');
         }
 
         return object.id;
@@ -52,7 +52,7 @@ class Container {
             const files = JSON.parse(allFiles);
             return files;
         } catch (e) {
-            console.error(e);
+            console.error('No hay archivos');
         }
     }
 
@@ -81,6 +81,10 @@ class Container {
 
 const products = new Container('products');
 
+const createContent = (name, price, thumbnail) => {
+    return { name, price, thumbnail };
+};
+
 const items = [
     {
         name: 'Manzana',
@@ -100,12 +104,36 @@ const items = [
         thumbnail:
             'https://www.hogarmania.com/archivos/201211/438-nutricion-naranja-propiedades-xl-1280x720x80xX.jpg',
     },
+    {
+        name: 'Sandia',
+        price: 100,
+        thumbnail:
+            'https://www.webconsultas.com/sites/default/files/styles/wch_image_schema/public/articulos/valor-nutricional-sandia.jpg',
+    },
+    {
+        name: 'Frutilla',
+        price: 100,
+        thumbnail:
+            'https://jumboargentina.vtexassets.com/arquivos/ids/421110/Frutilla-Por-Kg-1-10917.jpg?v=636481016510630000',
+    },
 ];
 
-let count = 0;
-const interval = setInterval(() => {
-    if (count < items.length) {
-        products.saveFile(items[count]);
-        count++;
-    } else clearInterval(interval);
-}, 500);
+const generateProducts = () => {
+    let count = 0;
+    const interval = setInterval(() => {
+        if (count < items.length) {
+            products.saveFile(
+                createContent(
+                    items[count].name,
+                    items[count].price,
+                    items[count].thumbnail
+                )
+            );
+            count++;
+        } else clearInterval(interval);
+    }, 500);
+
+    return '<h1>Recargué la página</h1>';
+};
+
+module.exports = { Container, generateProducts };
