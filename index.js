@@ -1,49 +1,58 @@
-// class User {
-//     constructor(name, surname, books = [], pets = []) {
-//         this.name = name;
-//         this.surname = surname;
-//         this.books = books;
-//         this.pets = pets;
-//     }
+const { productsRouterApi, express } = require('./products');
+const app = express();
+const PORT = process.env.port || 8080;
 
-//     getFullName() {
-//         return `${this.name} ${this.surname}`;
-//     }
+let productsContainer = [];
 
-//     addPet(namePet) {
-//         this.pets.push(namePet);
-//     }
+const pathAbsolute = __dirname;
 
-//     countPets() {
-//         return this.pets.length;
-//     }
+app.use('/formulario', express.static(pathAbsolute + '/public/form.html'));
 
-//     addBook(nameBook, nameAuthor) {
-//         const infoBook = {
-//             name: nameBook,
-//             author: nameAuthor,
-//         };
-//         this.books.push(infoBook);
-//     }
+productsRouterApi.get('/', (request, response) => {
+	response.send({ productsContainer });
+});
 
-//     getBookNames() {
-//         let names = this.books.map((bookName) => bookName.name);
-//         return names;
-//     }
+productsRouterApi.get('/:id', (request, response) => {
+	const params = request.params.id;
+	const productSelected = productsContainer.filter(
+		(product) => product.id == params
+	);
+	productSelected.length
+		? response.send(productSelected)
+		: response.send({ error: 'product not found' });
+});
 
-//     getFullAtributte() {
-//         return this;
-//     }
-// }
+productsRouterApi.post('/', (request, response) => {
+	const { product, title, price, thumbnail } = request.body;
+	product.id = productsContainer.length + 1;
+	productsContainer.push(product || { title, price, thumbnail });
+	response.send({ product, title, price, thumbnail });
+});
 
-// const matias = new User("Matias", "Arzamendia");
+productsRouterApi.put('/:id', (request, response) => {
+	const params = request.params.id;
+	const update = request.body;
 
-// console.log(matias.getFullName());
-// matias.addPet("Poclin");
-// matias.addPet("Arena");
-// console.log(matias.countPets());
-// matias.addBook("El amor en los tiempos del cólera", "Gabriel García Márquez");
-// matias.addBook("Harry Potter y la cámara de los secretos", "J. K. Rowling");
-// console.log(matias.getBookNames());
+	productsContainer.forEach((item) => {
+		if (item.id == params) {
+			item = update;
+		} else item;
 
-// // console.log(matias.getFullAtributte());
+		response.send(item);
+	});
+});
+
+productsRouterApi.delete('/:id', (request, response) => {
+	const params = request.params.id;
+	const deleteProduct = productsContainer.filter(
+		(product) => product.id != params
+	);
+	productsContainer = deleteProduct;
+	response.send(productsContainer);
+});
+
+app.use(express.json());
+
+app.use('/api/productos', productsRouterApi);
+
+app.listen(PORT, () => console.log('servidor desplegado'));
