@@ -1,54 +1,36 @@
-const { productsRouterApi, express } = require('./products');
+const { productsRouterApi, express, Products } = require('./products');
 const app = express();
 const PORT = process.env.port || 8080;
 
-let productsContainer = [];
-
 const pathAbsolute = __dirname;
+
+const productContainer = new Products('Products');
 
 app.use('/formulario', express.static(pathAbsolute + '/public/form.html'));
 
 productsRouterApi.get('/', (request, response) => {
-	response.send({ productsContainer });
+	response.send(productContainer.getAllProducts());
 });
 
 productsRouterApi.get('/:id', (request, response) => {
-	const params = request.params.id;
-	const productSelected = productsContainer.filter(
-		(product) => product.id == params
-	);
-	productSelected.length
-		? response.send(productSelected)
-		: response.send({ error: 'product not found' });
+	const id = request.params.id;
+	response.send(productContainer.getProductById(id));
 });
 
 productsRouterApi.post('/', (request, response) => {
-	const { product, title, price, thumbnail } = request.body;
-	product.id = productsContainer.length + 1;
-	productsContainer.push(product || { title, price, thumbnail });
-	response.send({ product, title, price, thumbnail });
+	const product = request.body;
+	response.send(productContainer.createProduct(product));
 });
 
 productsRouterApi.put('/:id', (request, response) => {
-	const params = request.params.id;
-	const update = request.body;
-
-	productsContainer.forEach((item) => {
-		if (item.id == params) {
-			item = update;
-		} else item;
-
-		response.send(item);
-	});
+	const id = request.params.id;
+	const product = request.body;
+	response.send(productContainer.updateProductById(id, product));
 });
 
 productsRouterApi.delete('/:id', (request, response) => {
-	const params = request.params.id;
-	const deleteProduct = productsContainer.filter(
-		(product) => product.id != params
-	);
-	productsContainer = deleteProduct;
-	response.send(productsContainer);
+	const id = request.params.id;
+	response.send(productContainer.deleteProductById(id));
 });
 
 app.use(express.json());

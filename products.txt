@@ -1,0 +1,1 @@
+[{"title":"leche","price":1002,"thumbnail":"hola","id":1},{"title":"naranja","price":50,"thumbnail":"Naranja de jugo","id":"2"}]
