@@ -1,1 +1,1 @@
-[{"title":"leche","price":1002,"thumbnail":"hola","id":1},{"title":"naranja","price":50,"thumbnail":"Naranja de jugo","id":"2"}]
+[{"animal":"dog","name":"Athenea","id":"1"},{"title":"naranja","price":50,"thumbnail":"Naranja de jugo","id":2},{"name":"Matias","surname":"Arzamendia","id":3}]
