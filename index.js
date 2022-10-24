@@ -6,8 +6,6 @@ const pathAbsolute = __dirname;
 
 const productContainer = new Products('Products');
 
-app.use('/formulario', express.static(pathAbsolute + '/public/form.html'));
-
 productsRouterApi.get('/', (request, response) => {
 	response.send(productContainer.getAllProducts());
 });
@@ -19,7 +17,9 @@ productsRouterApi.get('/:id', (request, response) => {
 
 productsRouterApi.post('/', (request, response) => {
 	const product = request.body;
-	response.send(productContainer.createProduct(product));
+	const { title, price, thumbnail } = request.body;
+	console.log(product);
+	response.send(productContainer.createProduct({ title, price, thumbnail }));
 });
 
 productsRouterApi.put('/:id', (request, response) => {
@@ -34,6 +34,7 @@ productsRouterApi.delete('/:id', (request, response) => {
 });
 
 app.use(express.json());
+app.use('/formulario', express.static(pathAbsolute + '/public/form.html'));
 
 app.use('/api/productos', productsRouterApi);
 
