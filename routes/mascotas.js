@@ -8,8 +8,8 @@ routerPets.get('/', (req, res) => {
 	res.send(pets);
 });
 routerPets.post('/', (req, res) => {
-	const newPet = req.body;
-	pets.push(newPet);
+	const { name, age } = req.body;
+	pets.push({ name, age });
 	res.send(pets);
 });
 

@@ -8,8 +8,8 @@ routerPeople.get('/', (req, res) => {
 	res.send(people);
 });
 routerPeople.post('/', (req, res) => {
-	const newPerson = req.body;
-	people.push(newPerson);
+	const { name, age } = req.body;
+	people.push({ name, age });
 	res.send(people);
 });
 

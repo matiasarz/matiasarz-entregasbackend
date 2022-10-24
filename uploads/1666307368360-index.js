@@ -65,14 +65,14 @@
 // app.use('static', express.static(pathAbsolute+'/public'));
 // app.listen(3000)
 
-// const express = require('express');
-// const app = express();
-// const port = 8080;
+const express = require('express');
+const app = express();
+const port = 8080;
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use('/subir', express.static(__dirname + '/public/files.html'));
-// app.use(express.static(__dirname + '/uploads'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/subir', express.static(__dirname + '/public/files.html'));
+app.use(express.static(__dirname + '/uploads'));
 
 // EJEMPLO MIDDELWARE
 // middleware que verifica si el usuario es un administrador
@@ -114,72 +114,31 @@
 // });
 
 // EJEMPLO MULTER
-// const multer = require('multer');
+const multer = require('multer');
 
-// const myStorage = multer.diskStorage({
-// 	destination: (req, file, cb) => {
-// 		cb(null, 'uploads');
-// 	},
-// 	filename: (req, file, cb) => {
-// 		const filename = `${Date.now()}-${file.originalname}`;
-// 		cb(null, filename);
-// 	},
-// });
+const myStorage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads');
+	},
+	filename: (req, file, cb) => {
+		const filename = `${Date.now()}-${file.originalname}`;
+		cb(null, filename);
+	},
+});
 
-// const upload = multer({ storage: myStorage });
+const upload = multer({ storage: myStorage });
 
-// app.post('/uploadfile', upload.single('myFile'), (req, res) => {
-// 	// req.file me lo da como resultado de la subida con multer
-// 	const file = req.file;
-// 	console.log(file);
-// 	if (!file) {
-// 		return res.status(400).send('Error subiendo el archivo');
-// 	}
-// 	res.status(200).json({
-// 		status: 'Archivo subido con exito',
-// 		link: __dirname + '/uploads/' + file.filename,
-// 	});
-// });
+app.post('/uploadfile', upload.single('myFile'), (req, res) => {
+	// req.file me lo da como resultado de la subida con multer
+	const file = req.file;
+	console.log(file);
+	if (!file) {
+		return res.status(400).send('Error subiendo el archivo');
+	}
+	res.status(200).json({
+		status: 'Archivo subido con exito',
+		link: __dirname + '/uploads/' + file.filename,
+	});
+});
 
-// app.listen(port);
-
-// MOTORES DE PLANTILLAS
-// En sintesis los motores de plantillas serian dibujar html desde el backend
-
-// EJERCICIO DE SIGLOS
-// const { toNumber } = require("lodash");
-
-// function solution(year) {
-//     const centuries = {};
-
-//     for (let cen = 1; cen <= 25; cen++) {
-
-//         let multiple = cen * 100;
-//         let minus = multiple - 99;
-
-//         let a = []
-
-//         for (minus; minus <= multiple; minus++) {
-//             a.push(minus)
-//         }
-//         centuries[cen] = a;
-//     }
-//     let response;
-
-//     for (const [key, value] of Object.entries(centuries)) {
-//         value.forEach(item => {
-//             if(item === year) {
-//                 response = toNumber(key);
-//             };
-//         })
-//     }
-
-//     return response;
-// }
-
-// HANDLEBARS
-const express = require('express');
-const { create } = require('express-handlebars');
-
-const app = express();
-const port = 3000;
+app.listen(port);
