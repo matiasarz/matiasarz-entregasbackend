@@ -17,9 +17,7 @@ productsRouterApi.get('/:id', (request, response) => {
 
 productsRouterApi.post('/', (request, response) => {
 	const product = request.body;
-	const { title, price, thumbnail } = request.body;
-	console.log(product);
-	response.send(productContainer.createProduct({ title, price, thumbnail }));
+	response.send(productContainer.createProduct(product));
 });
 
 productsRouterApi.put('/:id', (request, response) => {
@@ -34,6 +32,8 @@ productsRouterApi.delete('/:id', (request, response) => {
 });
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/formulario', express.static(pathAbsolute + '/public/form.html'));
 
 app.use('/api/productos', productsRouterApi);
