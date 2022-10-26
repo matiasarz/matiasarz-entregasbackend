@@ -7,12 +7,14 @@ const productContainer = new Products('Products');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.get('/', (request, response) => {
-	response.render('index.pug');
+	const url = { url: 'form' };
+	response.render('form.pug', url);
 });
 
 app.get('/productos', (request, response) => {
