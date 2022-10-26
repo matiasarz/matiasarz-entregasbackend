@@ -1,0 +1,14 @@
+<button class="changeView"><a href="/"><%='Ir a formulario'%></a></button>
+<section class="cardContainer">
+    <%if(products.length) {%>
+        <%products.map(item => {%>
+            <div class="card">
+                <h2><%=item.title%></h2>
+                <img src=<%=item.thumbnail%> alt=<%=item.title%>>
+                <p><%=item.price%></p>
+            </div>
+        <%})%>
+    <%} else {%>
+        <h1><%='Lista vacia'%></h1>
+    <%}%>
+</section>
