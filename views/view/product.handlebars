@@ -1,0 +1,14 @@
+<button class="changeView"><a href="/">Ir a formulario</a></button>
+<section class="cardContainer">
+    {{#if products.length}}
+    {{#each products }}
+        <div class="card">
+            <h2>{{ title }}</h2>
+            <img src={{ thumbnail }} alt={{ title }}>
+            <p>{{ price }}</p>
+        </div>
+    {{/each}}
+    {{else}}
+        <h1>Lista vacia</h1>
+    {{/if}}
+</section>

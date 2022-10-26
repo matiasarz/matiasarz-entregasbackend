@@ -1,7 +1,4 @@
 const express = require('express');
-const Router = express.Router;
-
-const productsRouterApi = Router();
 
 const fs = require('fs');
 
@@ -102,7 +99,6 @@ class Products {
 }
 
 module.exports = {
-	productsRouterApi,
 	express,
 	Products,
 };
