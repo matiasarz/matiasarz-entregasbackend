@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+main h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+.form {
+    border: 1px solid #dfdfdf;
+    background-color: #555591;
+    width: 80%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px 10px;
+    text-align: center;
+}
+.form div {
+    width: 90%;
+    margin: 20px auto;
+}
+.form div input {
+    width: 100%;
+    padding: 7px 5px;
+    outline: none;
+    border: none;
+}
+.form button {
+    padding: 7px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px;
+    gap: 20px;
+}
+.cardContainer .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #acacac;
+}
+.cardContainer .card img {
+    width: 180px;
+    height: 150px;
+    object-fit: contain;
+}
+.changeView {
+    margin: 20px;
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+}
+.changeView a {
+    color: #222;
+    font-size: 1em;
+    padding: 8px;
+}
+.changeView:hover {
+    color: #fff;
+    box-shadow: 0 5px 5px #ccc;
+}
