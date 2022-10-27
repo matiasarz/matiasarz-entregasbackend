@@ -30,6 +30,7 @@ class Products {
 				'utf-8'
 			);
 			const arrayProductsParseado = JSON.parse(arrayProducts);
+			if (id == undefined) return arrayProductsParseado;
 			const product = arrayProductsParseado.filter(
 				(item) => item.id == id
 			);
