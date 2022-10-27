@@ -3,8 +3,6 @@ const { create } = require('express-handlebars');
 const app = express();
 const PORT = process.env.port || 8080;
 
-const pathAbsolute = __dirname;
-
 const productContainer = new Products('Products');
 
 app.use(express.json());

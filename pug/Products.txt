@@ -1,1 +1,1 @@
-[{"title":"dsfas","price":"324","thumbnail":"sdfa","id":1},{"title":"sdfasda","price":"231","thumbnail":"sdfsd","id":2}]
+[{"title":"dsfas","price":"324","thumbnail":"sdfa","id":1},{"title":"sdfasda","price":"231","thumbnail":"sdfsd","id":2},{"title":"naranja","price":"100","thumbnail":"https://www.finedininglovers.com/es/sites/g/files/xknfdk1706/files/styles/article_1200_800_fallback/public/2022-02/tipi%20di%20arance%20-%20Finedininglovers.jpg?itok=-v2tcDmu","id":3}]
