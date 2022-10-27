@@ -1,4 +1,4 @@
-const { express, Products } = require('../products.js');
+const { Products, express } = require('../products.js');
 const app = express();
 const PORT = process.env.port || 8080;
 
@@ -20,10 +20,12 @@ app.get('/productos', (request, response) => {
 		products: productContainer.getAllProducts(),
 	});
 });
-app.post('/', (request, response) => {
+app.post('/productos', (request, response) => {
 	const product = request.body;
 	productContainer.createProduct(product);
 	response.redirect('/');
 });
 
 app.listen(PORT, () => console.log('servidor desplegado'));
+
+module.exports = productContainer;

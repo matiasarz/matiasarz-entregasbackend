@@ -43,10 +43,10 @@ main h1 {
 .cardContainer .card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 200px;
-    height: 250px;
+    height: 300px;
     gap: 10px;
     padding: 10px;
     border-radius: 8px;

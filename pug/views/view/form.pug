@@ -4,7 +4,7 @@ html
             button(class='changeView') 
                 a(href='/productos')= 'Ir a lista'
             h1= 'Cargar productos'
-            form(action='/' method='POST' class='form')
+            form(action='/productos' method='POST' class='form')
                 div 
                     input(type="text" placeholder="Nombre del producto" name="title" required)
                 div 
