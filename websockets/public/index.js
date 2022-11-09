@@ -11,6 +11,9 @@ const getListProduct = async (url) => {
 	return data;
 };
 
+const imageDefault =
+	'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
+
 formProduct.addEventListener('submit', (e) => {
 	e.preventDefault();
 	let array = [];
@@ -36,7 +39,14 @@ socket.on('sendProducts', (message) => {
 		const clone = template.cloneNode(true);
 		clone.querySelector('.listItem h2').innerText = product.title;
 		clone.querySelector('.listItem p').innerText = product.price;
-		clone.querySelector('.listItem picture img').src = product.thumbnail;
+		if (
+			!product.thumbnail.includes('http') ||
+			!product.thumbnail.includes('https')
+		) {
+			clone.querySelector('.listItem picture img').src = imageDefault;
+		} else
+			clone.querySelector('.listItem picture img').src =
+				product.thumbnail;
 		clone.querySelector('.listItem picture img').alt = product.title;
 
 		fragment.appendChild(clone);
