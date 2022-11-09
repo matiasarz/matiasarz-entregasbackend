@@ -57,3 +57,4 @@ socketIO.on('connection', (socket) => {
 });
 
 httpServer.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+httpServer.on(PORT, (e) => console.error(e));
