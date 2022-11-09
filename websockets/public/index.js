@@ -6,6 +6,7 @@ const listContainer = document.querySelector('.listContainer');
 const title = document.getElementById('title');
 const formMessage = document.getElementById('formMessage');
 const boxChat = document.querySelector('.boxChat');
+const authorMessage = document.getElementById('author');
 
 // const getListProduct = async (url) => {
 // 	const response = await fetch(url);
@@ -32,7 +33,18 @@ formProduct.addEventListener('submit', (e) => {
 formMessage.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const inputMessage = formMessage.querySelector('input');
-	socket.emit('message', inputMessage.value);
+	socket.emit('message', {
+		message: inputMessage.value,
+		author: authorMessage.value || 'Sin nombre',
+		time: [
+			[
+				new Date().getDay(),
+				new Date().getMonth(),
+				new Date().getFullYear(),
+			],
+			[new Date().getHours(), new Date().getMinutes()],
+		],
+	});
 	inputMessage.value = '';
 	inputMessage.focus();
 });
@@ -64,12 +76,17 @@ socket.on('sendProducts', (message) => {
 });
 
 socket.on('chat', (chat) => {
+	console.log(chat);
 	if (!chat.length) {
 		boxChat.innerHTML = '<p>Sin mensajes</p>';
 		return;
 	}
 	boxChat.innerText = '';
-	chat.map((message) => {
-		boxChat.innerHTML += `<div>${message}</div>`;
+	chat.map((chat) => {
+		boxChat.innerHTML += `<div class='listMessage'><p class='author'>${
+			chat.author
+		}:</p><p class='time'>${chat.time[0].join('/')} - ${chat.time[1].join(
+			':'
+		)}</p><p class='message'>${chat.message}</p></div>`;
 	});
 });

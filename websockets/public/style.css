@@ -80,5 +80,48 @@ main h1 {
     box-shadow: 0 5px 5px #ccc;
 }
 .messagesContainer {
+    background-color: #dfdfdf;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px 10px;
+}
+.messagesContainer div {
+    margin: 10px auto;
+}
+.messagesContainer h2 {
     text-align: center;
+    color: #555591;
+}
+.messagesContainer form {
+    text-align: center;
+    margin: 10px auto;
+}
+.messagesContainer input {
+    border: 1px solid #232353;
+    padding: 7px 5px;
+    outline: none;
+}
+.messagesContainer button {
+    padding: 7px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.messagesContainer .listMessage {
+    width: 80%;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 130px 130px 1fr;
+    gap: 10px;
+}
+.messagesContainer .listMessage .author {
+    color: #14148a;
+}
+.messagesContainer .listMessage .message::first-letter, .author::first-letter {
+    text-transform: uppercase;
+}
+.messagesContainer .listMessage .message {
+    color: #22ac22;
+}
+.messagesContainer .listMessage .time {
+    color: #860505;
 }
