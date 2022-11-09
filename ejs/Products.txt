@@ -1,1 +1,0 @@
-[{"title":"matias","price":"22","thumbnail":"sdjkaf","id":1},{"title":"sdaf","price":"3","thumbnail":"sdf","id":2},{"title":"manzana","price":"150","thumbnail":"https://t1.uc.ltmcdn.com/es/posts/6/6/4/que_vitaminas_tiene_la_manzana_51466_orig.jpg","id":3}]
