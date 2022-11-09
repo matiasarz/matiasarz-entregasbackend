@@ -1,4 +1,4 @@
-const { express, Products } = require('../products.js');
+const { express, Products } = require('./products.js');
 const { create } = require('express-handlebars');
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
