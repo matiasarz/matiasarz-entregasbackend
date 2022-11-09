@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', (request, response) => {
-	response.render('view/home');
+	response.render('view/index');
 });
 app.get('/productos', (req, res) =>
 	res.send(productContainer.getAllProducts())
