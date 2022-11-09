@@ -4,12 +4,14 @@ const template = document.getElementById('templateListProduct').content;
 const fragment = document.createDocumentFragment();
 const listContainer = document.querySelector('.listContainer');
 const title = document.getElementById('title');
+const formMessage = document.getElementById('formMessage');
+const boxChat = document.querySelector('.boxChat');
 
-const getListProduct = async (url) => {
-	const response = await fetch(url);
-	const data = await response.json();
-	return data;
-};
+// const getListProduct = async (url) => {
+// 	const response = await fetch(url);
+// 	const data = await response.json();
+// 	return data;
+// };
 
 const imageDefault =
 	'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png';
@@ -27,6 +29,14 @@ formProduct.addEventListener('submit', (e) => {
 	socket.emit('updateView', array);
 });
 
+formMessage.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const inputMessage = formMessage.querySelector('input');
+	socket.emit('message', inputMessage.value);
+	inputMessage.value = '';
+	inputMessage.focus();
+});
+
 socket.on('sendProducts', (message) => {
 	if (!message.products.length) {
 		listContainer.innerHTML =
@@ -35,7 +45,6 @@ socket.on('sendProducts', (message) => {
 	}
 	listContainer.innerText = '';
 	message.products.map((product) => {
-		console.log(product);
 		const clone = template.cloneNode(true);
 		clone.querySelector('.listItem h2').innerText = product.title;
 		clone.querySelector('.listItem p').innerText = product.price;
@@ -52,4 +61,15 @@ socket.on('sendProducts', (message) => {
 		fragment.appendChild(clone);
 	});
 	listContainer.appendChild(fragment);
+});
+
+socket.on('chat', (chat) => {
+	if (!chat.length) {
+		boxChat.innerHTML = '<p>Sin mensajes</p>';
+		return;
+	}
+	boxChat.innerText = '';
+	chat.map((message) => {
+		boxChat.innerHTML += `<div>${message}</div>`;
+	});
 });

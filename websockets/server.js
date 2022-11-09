@@ -35,7 +35,7 @@ app.post('/productos', (request, response) => {
 });
 
 // socket
-
+let messages = [];
 socketIO.on('connection', (socket) => {
 	socketIO.sockets.emit('sendProducts', {
 		userID: socket.id,
@@ -48,6 +48,11 @@ socketIO.on('connection', (socket) => {
 			userID: socket.id,
 			products: productContainer.getAllProducts(),
 		});
+	});
+	socketIO.sockets.emit('chat', messages);
+	socket.on('message', (message) => {
+		messages.push(message);
+		socketIO.sockets.emit('chat', messages);
 	});
 });
 
